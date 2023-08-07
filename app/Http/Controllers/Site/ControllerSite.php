@@ -1,11 +1,11 @@
-<?php
+<?php 
 
 namespace App\Http\Controllers\Site;
 
-class SiteController
-{
-    public function contact()
-    {
+class ControllerSite {
+    public function contact() {
         return view('site/contact');
     }
 }
+
+?>
