@@ -33,8 +33,8 @@ class SupportController extends Controller
         //Support::create($data); // Cadastro os valores na base de dados com os dados passados na variavel
        // $support->create($data);
         $support = $support->create($data);
-        //dd($support); valida 
+        //dd($support); //valida 
 
-        return redirect()->route('supports.index');
+        return redirect()->route('supports/index');
     }
 }
