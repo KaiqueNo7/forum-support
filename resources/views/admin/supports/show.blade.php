@@ -14,5 +14,11 @@
         <li>Conteudo: {{ $support->status}} </li>
         <li>Status: {{ $support->body}} </li>
     </ul>
+
+    <form action="{{ route('supports/destroy', $support->id) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit">Deletar</button>
+    </form>
 </body>
 </html>
