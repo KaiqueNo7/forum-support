@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdateSupport;
 use App\Models\Support;
 use Illuminate\Http\Request;
 
@@ -37,13 +38,13 @@ class SupportController extends Controller
     }
 
     //public function store(Request $request) DUAS FORMAS DE FAZER
-    public function store(Request $request, Support $support)
+    public function store(StoreUpdateSupport $request, Support $support)
     {
         //dd($request->body); PEGA O VALOR DO CAMPO DE FORMA SIMPLIFICADA
         //dd($request->get('axas', 'default')); se campo não existir define valor como default
         //dd($request->get('body'));
 
-        $data = $request->all(); // PEGA TODOS OS DADOS DO FORMULÁRIO
+        $data = $request->validated(); // PEGA TODOS OS DADOS DO FORMULÁRIO
         $data['status'] = 'a'; // DEFINE O VALOR STATUS COMO 'A'
 
         //Support::create($data); // Cadastro os valores na base de dados com os dados passados na variavel
@@ -63,7 +64,7 @@ class SupportController extends Controller
         return view('admin/supports/edit', compact('support'));
     }
 
-    public function update(Request $request, Support $support, string $id)
+    public function update(StoreUpdateSupport $request, Support $support, string $id)
     {
         if(!$support = $support->find($id)){
             return back(); 
@@ -75,9 +76,11 @@ class SupportController extends Controller
         // $support->save();
 
         // PEGANDO ATRAVÉS DE UM ARRAY
-        $support->update($request->only([
+        /*$support->update($request->only([
             'subject', 'body' // SÓ VOU TRAZER E EDITAR ESSES DOIS VALORES
-        ]));
+        ]));*/
+
+        $support->update($request->validated());
 
         return redirect()->route('supports/index');
     }
