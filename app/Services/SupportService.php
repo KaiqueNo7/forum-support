@@ -15,7 +15,7 @@ class SupportService
 
     public function getAll(string $filter = null): array
     {
-       return $this->repository->getAll($filter)
+       return $this->repository->getAll($filter);
     }
 
     public function findOne(string $id): stdClass|null
@@ -53,6 +53,6 @@ class SupportService
 
     public function delete(string $id): void
     {
-        $this->repository->delete($id)
+        $this->repository->delete($id);
     }
 }
