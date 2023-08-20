@@ -2,7 +2,6 @@
 
 namespace App\DTO\Supports;
 
-use App\Enums\SupportStatus;
 use App\Http\Requests\StoreUpdateSupport;
 
 class UpdateSupportDTO
@@ -10,16 +9,16 @@ class UpdateSupportDTO
     public function __construct(
         public string $id,
         public string $subject,
-        public SupportStatus $status,
+        public string $status,
         public string $body,
     ) {}
 
-    public static function makeFromRequest(StoreUpdateSupport $request, string $id = null): self
+    public static function makeFromResquest(StoreUpdateSupport $request, string $id = null): self
     {
         return new self(
             $id ?? $request->id,
             $request->subject,
-            SupportStatus::A,
+            'a',
             $request->body
         );
     }

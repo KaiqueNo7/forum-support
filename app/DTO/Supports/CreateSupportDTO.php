@@ -9,15 +9,15 @@ class CreateSupportDTO
 {
     public function __construct(
         public string $subject,
-        public SupportStatus $status,
+        public string $status,
         public string $body,
     ) {}
 
-    public static function makeFromRequest(StoreUpdateSupport $request): self
+    public static function makeFromResquest(StoreUpdateSupport $request)
     {
         return new self(
             $request->subject,
-            SupportStatus::A,
+            'a',
             $request->body
         );
     }
