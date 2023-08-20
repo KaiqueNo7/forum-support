@@ -17,29 +17,20 @@ class SupportController extends Controller
         protected SupportService $service
     ){}
 
-    //public function index(Support $support)
     public function index(Request $request)
     {
-        //$supports = $support->all();
         $supports = $this->service->getAll($request->filter);
+
+        dd($supports);
 
         return view('admin/supports/index', compact('supports'));
     }
 
     public function show(string $id)
     {
-       // Support::find($id) Aqui filtra somente pela primary key
-       // Support::where('id', $id)->first(); Aqui pode filtrar por qualquer campo da base de dados
-       // Support::where('id', '!=', $id)->first(); Só pega se o valor for diferente
-       // Support::where('id', '=', $id)->first(); Só pega se o valor for igual
-      // if(!$support = Support::find($id)){
        if(!$support = $this->service->findOne($id)){
-        //return redirect()->back(); // Manda o usuário de volta para pagina que veio se o valor for igual a null
         return back();
        };
-
-        //dd($support->subject);
-        //dd($support);
 
         return view('admin/supports/show', compact('support'));
     }
@@ -51,7 +42,7 @@ class SupportController extends Controller
 
     public function store(StoreUpdateSupport $request, Support $support)
     {
-        $this->service->new(
+        $this->service->create(
             CreateSupportDTO::makeFromResquest($request)
         );
 
