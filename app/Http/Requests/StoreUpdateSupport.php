@@ -23,7 +23,7 @@ class StoreUpdateSupport extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'subject' => 'required|min:3|max:255|unique:support',
+            'subject' => 'required|min:3|max:255|unique:supports',
             'body' => [
                 'required',
                 'min:3',
