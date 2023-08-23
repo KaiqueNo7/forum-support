@@ -19,12 +19,15 @@ class SupportController extends Controller
 
     public function index(Request $request)
     {
-        $supports = $this->service->getAll($request->filter);
-        $supports = Support::paginate();
-        {{ $supports->links(); }}
+        $supports = $this->service->paginate(
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 3),
+            filter: $request->filter,
+        );
 
+        $filters = ['filter' => $request->get('filter', '')];
 
-        return view('admin/supports/index', compact('supports'));
+        return view('admin/supports/index', compact('supports', 'filters'));
     }
 
     public function show(string $id)
@@ -76,14 +79,6 @@ class SupportController extends Controller
 
     public function destroy(string $id)
     {
-        //if(!$support = Support::find($id)->delete()){
-        //if(!$support = Support::find($id)){
-        /*if (!$support = $this->service->findOne($id)){
-            return back();
-
-            $support->delete();
-        }*/
-
         $this->service->delete($id);
 
         return redirect()->route('supports/index');
