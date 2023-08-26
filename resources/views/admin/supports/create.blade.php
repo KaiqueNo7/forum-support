@@ -1,11 +1,13 @@
-<h1>Nova dúvida</h1>
+@extends('admin.layouts.app')
 
-@if ($errors->any())
-    @foreach ($errors->all() as $error)
-        {{ $error }}
-    @endforeach
-@endif
+@section('title', 'Criar Novo Tópico')
 
-<form method="POST" action="{{ route('supports/store') }}">
-    @include('admin/supports/partials/form')
+@section('header')
+<h1 class="text-lg text-black-500">Nova Dúvida</h1>
+@endsection
+
+@section('content')
+<form action="{{ route('supports.store') }}" method="POST">
+    @include('admin.supports.partials.form')
 </form>
+@endsection
