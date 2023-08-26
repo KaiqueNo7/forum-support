@@ -3,7 +3,7 @@
 namespace App\Adapters;
 
 use App\Http\Resources\DefaultResource;
-use App\Repositories\Contracts\PaginationInterface;
+use App\Repositories\PaginationInterface;
 
 class ApiAdapter
 {
